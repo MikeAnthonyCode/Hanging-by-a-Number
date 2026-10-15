@@ -1,3 +1,5 @@
+//---------------Constants-----------------------//
+
 //State changes as the player takes turns.
 let secretNumber;
 let wrongGuesses;
@@ -5,7 +7,7 @@ let previousGuesses;
 let gameOver;
 let message;
 
-// Cache the Elements
+//----------------Cache the Elements--------------//
 
 const guessInputEl = document.querySelector('#guess-input');
 const guessBtnEl = document.querySelector('#guess');
@@ -16,7 +18,7 @@ const resultDisplayEl = document.querySelector('#result-display');
 const historyDisplayEl = document.querySelector('#history-display');
 
 
-//------------------Functions--------------------
+//------------------Functions----------------------//
 
 function getRandomNumber() {
     return Math.floor(
@@ -104,7 +106,6 @@ function handleRandomGuess() {
 
     handleGuess();
 }
-
 
 
 //-------------------Event Listeners-------------------//
