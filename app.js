@@ -55,3 +55,42 @@ function render() {
     guessBtnEl.disabled = gameOver;
     randomBtnEl.disabled = gameOver;
 }
+
+function handleGuess() {
+    if (gameOver === true) {
+        return;
+    }
+    const guess = Number(guessInputEl.value);
+    if (
+        guessInputEl.value === '' ||
+        Number.isInteger(guess) === false ||
+        guess < minNumber ||
+        guess > maxNumber
+    ) {
+        message = `Enter a whole number from ${minNumber} to ${maxNumber}.`;
+        render();
+        return;
+    }
+    if (previousGuesses.includes(guess)) {
+        message = 'You already tried that number. Choose another!';
+        render();
+        return;
+    }
+    previousGuesses.push(guess);
+    if (guess === secretNumber) {
+        gameOver = true;
+        message = `You win! The secret number was ${secretNumber}!`;
+    } else {
+        wrongGuesses = wrongGuesses + 1;
+        if (wrongGuesses === maxGuesses) {
+            gameOver = true;
+            message = `Game over! The secret number was ${secretNumber}.`;
+        } else if (guess < secretNumber) {
+            message = `${guess} is too low. Try a higher number!`;
+        } else {
+            message = `${guess} is too high. Try a lower number!`;
+        }
+    }
+    guessInputEl.value = '';
+    render();
+}
