@@ -14,6 +14,41 @@ body {
     align-items: center;
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #11141a; /* Dark background */
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensures it stays on top of everything */
+    opacity: 1;
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth fade effect */
+    cursor: pointer;
+}
+
+/* Overlay Text Formatting */
+.overlay-content {
+    text-align: center;
+}
+
+.overlay-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+/* This class will be added by JavaScript to make it disappear */
+.overlay.hidden {
+    opacity: 0;
+    visibility: hidden; /* Hides it completely and prevents element blocking clicks underneath */
+    pointer-events: none; /* Disables any further clicks on the overlay */
+}
+
 main {
     width: 100%;
     max-width: 1050px;
@@ -46,4 +81,45 @@ input {
 
 button:disabled {
     opacity: 0.5;
+}
+
+/* Keep the guess history clearly separated. */
+.history-panel {
+    width: 190px;
+    align-self: stretch;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #f1f4f8;
+    text-align: left;
+    flex-shrink: 0;
+}
+
+#history-display {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#history-display li {
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.too-low {
+    color: #175cc4;
+}
+
+.too-high {
+    color: #bb2929;
+}
+
+.correct {
+    color: #18733b;
+}
+
+#history-display .empty-history {
+    font-size: 16px;
+    font-weight: normal;
+    color: #526078;
 }

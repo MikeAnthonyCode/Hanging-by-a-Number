@@ -8,7 +8,7 @@ let gameOver;
 let message;
 
 //----------------Cache the Elements--------------//
-
+const overlay = document.getElementById('start-overlay');
 const guessInputEl = document.querySelector('#guess-input');
 const guessBtnEl = document.querySelector('#guess');
 const randomBtnEl = document.querySelector('#random')
@@ -16,7 +16,7 @@ const resetBtnEl = document.querySelector('#reset');
 const remainingDisplayEl = document.querySelector('#remaining-display');
 const resultDisplayEl = document.querySelector('#result-display');
 const historyDisplayEl = document.querySelector('#history-display');
-
+const startBtn = document.querySelector('#startBtn')
 
 //------------------Functions----------------------//
 
@@ -26,7 +26,7 @@ function getRandomNumber() {
     ) + minNumber;
 }
 
-// Start a fresh round using the fixed range in data.js
+// Start a fresh round using the following rules
 function init() {
     secretNumber = getRandomNumber();
     wrongGuesses = 0;
@@ -107,7 +107,39 @@ function handleRandomGuess() {
     handleGuess();
 }
 
+// Create one colored list item for each previous guess.
+function updateHistory() {
+    historyDisplayEl.textContent = '';
 
+    if (previousGuesses.length === 0) {
+        const emptyItem = document.createElement('li');
+
+        emptyItem.textContent = 'No guesses yet';
+        emptyItem.classList.add('empty-history');
+
+        historyDisplayEl.appendChild(emptyItem);
+        return;
+    }
+
+    previousGuesses.forEach((guess) => {
+        const guessItem = document.createElement('li');
+
+        if (guess < secretNumber) {
+            guessItem.textContent = `${guess} — Too low`;
+            guessItem.classList.add('too-low');
+        } else if (guess > secretNumber) {
+            guessItem.textContent = `${guess} — Too high`;
+            guessItem.classList.add('too-high');
+        } else {
+            guessItem.textContent = `${guess} — Correct!`;
+            guessItem.classList.add('correct');
+        }
+
+        historyDisplayEl.appendChild(guessItem);
+    });
+
+    
+}
 //-------------------Event Listeners-------------------//
 
 // Run the functions
@@ -118,6 +150,9 @@ guessInputEl.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         handleGuess();
     }
+});
+startBtn.addEventListener('click', () => {
+    overlay.classList.add('hidden'); // Adds the CSS class that triggers the fade-out
 });
 
 
