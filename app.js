@@ -13,7 +13,7 @@ const randomBtnEl = document.querySelector('#random')
 const resetBtnEl = document.querySelector('#reset');
 const remainingDisplayEl = document.querySelector('#remaining-display');
 const resultDisplayEl = document.querySelector('#result-display');
-const histroyDisplayEl = document.querySelector('#history-dispaly');
+const historyDisplayEl = document.querySelector('#history-display');
 
 
 //------------------Functions--------------------
@@ -94,3 +94,32 @@ function handleGuess() {
     guessInputEl.value = '';
     render();
 }
+
+function handleRandomGuess() {
+    if (gameOver === true) {
+        return;
+    }
+
+    guessInputEl.value = getRandomNumber();
+
+    handleGuess();
+}
+
+
+
+//-------------------Event Listeners-------------------//
+
+// Run the functions
+guessBtnEl.addEventListener('click', handleGuess);
+randomBtnEl.addEventListener('click', handleRandomGuess);
+resetBtnEl.addEventListener('click', init);
+guessInputEl.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        handleGuess();
+    }
+});
+
+
+// Call init once now to start the first round.
+init();
+
