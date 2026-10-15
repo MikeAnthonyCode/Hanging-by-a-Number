@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanging by a Number</title>
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./app.js"></script>
+</head>
+<body>
+    <main>
+        <h1>Hanging by a Number</h1>
+        <p>Guess a whole number from 1 to 100.</p>
+        <p>You have six chances. Use the higher or lower clues.</p>
+    
+    <p id="remaining-display"></p>
+        <p id="result-display" role="status"></p>
+        <label for="guess-input">Your guess</label>
+        <input id="guess-input" type="number"
+            min="1" max="100 step="1" placeholder="1-100">
+        <div class="buttons">
+            <button id="guess" type="button">Submit Guess</button>
+            <button id="random" type="button">Random</button>
+            <button id="reset" type="button">Reset</button>
+        </div>
+        <p class="small-text">Random submits a number for you.</p>
+        <p id="history-display"></p>
+    </main>
+</body>
+</html>
