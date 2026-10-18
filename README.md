@@ -15,8 +15,6 @@ Deployment is pending instructor confirmation. A verified playable link will be 
 ![Henry standing free after all stages](assets/freed-henry.png)
 ## Technologies used
 HTML, CSS with Flexbox, and vanilla JavaScript using the DOM. Henry is drawn with CSS shapes. No external game libraries are used.
-## Development and attribution
-I developed the game from my earlier Basic prototype. AI assistance supported the code, explanations and testing. I am reviewing the implementation and following my course’s policy for acknowledging that assistance. Screenshots show the game itself.
 ## Next steps
 - Obtain instructor confirmation and publish the approved game.
 - Add an optional sound toggle.
