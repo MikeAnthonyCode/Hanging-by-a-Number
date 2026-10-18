@@ -165,6 +165,24 @@ button:disabled {
     font-weight: normal;
     color: #526078;
 }
+.streak-panel {
+    position: relative;
+    min-height: 42px;
+    padding-right: 44px;
+    text-align: left;
+}
+#streak-display, #reward-display {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: bold;
+}
+#face-display {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 35px;
+    line-height: 1;
+}
 /* Position streak text and its reaction to sit directly above the hangman drawing */
 #henry-caption {
     font-size: 17px;

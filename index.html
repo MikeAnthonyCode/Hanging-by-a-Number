@@ -19,7 +19,7 @@
     </section>
     <main id="game" hidden>
         <h1>Hanging by a Number</h1>
-        <p id="instructions">Guess a whole number from 1 to 100. Six wrong guesses lose the round.</p>
+        <p id="instructions"></p>
         <div class="difficulty-controls">
             <label for="difficulty">Game mode</label>
             <select id="difficulty">
@@ -31,6 +31,11 @@
         <p class="small-text">Changing mode or restarting clears progress.</p>
         <div class="game-layout">
             <section class="drawing-panel" aria-label="Henry and your win streak">
+                <div class="streak-panel">
+                    <p id="streak-display"></p>
+                    <p id="reward-display"></p>
+                    <span id="face-display" role="img" aria-label="Feeling confident">&#128578;</span>
+                </div>
                 <!-- Decorative drawing; the text beside it explains the game state. -->
                 <div id="hangman" aria-hidden="true">
                     <div class="base"></div>
@@ -50,10 +55,11 @@
                 <p id="remaining-display"></p>
                 <p id="result-display" role="status" aria-live="polite"></p>
                 <label for="guess-input">Your guess</label>
-                <input id="guess-input" type="number" min="1" max="100" step="1" aria-describedby="instructions">
+                <input id="guess-input" type="number" min="1" max="20" step="1" aria-describedby="instructions">
                 <div class="buttons">
                     <button id="guess" type="button">Submit</button>
                     <button id="random" type="button">Random</button>
+                    <button id="next" type="button" hidden>Next round</button>
                     <button id="reset" type="button">Restart mode</button>
                 </div>
                 <p class="small-text">Enter submits too. Random guesses can cost a mistake.</p>
