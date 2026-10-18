@@ -75,6 +75,10 @@ select {
     flex-direction: column;
     align-items: center;
 }
+#stage-display {
+    color: #175cc4;
+    font-weight: bold;
+}
 #remaining-display {
     font-size: 20px;
     font-weight: bold;
@@ -135,6 +139,18 @@ button:disabled {
     border-radius: 12px;
     background-color: #f1f4f8;
     text-align: left;
+}
+#rescue-rules {
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.35;
+}
+#rescue-rules ol {
+    margin: 6px 0;
+    padding-left: 20px;
+}
+#rescue-rules li {
+    margin-bottom: 4px;
 }
 /* Six accepted guess fit in three rows; no history is hidden. */
 #history-display {
@@ -274,6 +290,14 @@ button:disabled {
     left: 141px;
     top: 166px;
     transform: rotate(55deg);
+}
+/* Free Henry stands on the base after completing the rescue. */
+#hangman.freed .pole, #hangman.freed .beam, #hangman.freed .rope {
+    display: none;
+}
+#hangman.freed .body-part {
+    margin-top: 51px;
+    background-color: #18733b;
 }
 .welcome {
     max-width: 720px;

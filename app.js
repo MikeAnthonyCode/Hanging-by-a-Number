@@ -6,6 +6,10 @@ let previousGuesses;
 let gameOver;
 let message;
 let winStreak = 0;
+let stageIndex = 0;
+let stageWins = 0;
+let henryFreed = false;
+let rescueLost = false;
 /* 2. Cache the HTML elements once so functions can reuse them below. */
 const startScreenEl = document.querySelector('#start-screen');
 const startBtnEl = document.querySelector('#start');
@@ -20,9 +24,12 @@ const instructionsEl = document.querySelector('#instructions');
 const remainingDisplayEl = document.querySelector('#remaining-display');
 const resultDisplayEl = document.querySelector('#result-display');
 const historyDisplayEl = document.querySelector('#history-display');
+const stageDisplayEl = document.querySelector('#stage-display');
+const rulesEl = document.querySelector('#rescue-rules');
 const streakDisplayEl = document.querySelector('#streak-display');
 const rewardDisplayEl = document.querySelector('#reward-display');
 const faceDisplayEl = document.querySelector('#face-display');
+const hangmanEl = document.querySelector('#hangman');
 const captionEl = document.querySelector('#henry-caption');
 const bodyPartEls = document.querySelectorAll('.body-part');
 /* 3. Round setup. Resetting a mode and starting a round are different jobs. */
@@ -31,10 +38,17 @@ function getRandomNumber() {
 }
 function init() {
     winStreak = 0;
+    stageIndex = 0;
+    stageWins = 0;
+    henryFreed = false;
+    rescueLost = false;
     startRound();
 }
 function startRound() {
     let difficulty = difficultyEl.value;
+    if (difficulty === 'free') {
+        difficulty = stageNames[stageIndex];
+    }
     if (difficulty === 'easy') {
         maxNumber = 20;
     } else if (difficulty === 'medium') {
@@ -81,6 +95,15 @@ function handleGuess() {
             gameOver = true;
             winStreak = 0;
             message = `Round lost! The number was ${secretNumber}.`;
+            if (difficultyEl.value === 'free') {
+                stageWins = 0;
+                if (stageIndex === 2) {
+                    rescueLost = true;
+                    message += ' Rescue over. Restart from Easy.';
+                } else {
+                    message += ' Stage streak reset. Try again.';
+                }
+            }
         } else if (guess < secretNumber) {
             message = `${guess} is too low. Try a higher number!`;
         } else {
@@ -97,15 +120,30 @@ function handleGuess() {
         resetBtnEl.focus();
     }
 }
-/* A win increases the consecutive win streak. */
+/* 5. A rescue win counts toward the current stage. */
 function handleWin() {
     gameOver = true;
     winStreak = winStreak + 1;
     message = `You win! The number was ${secretNumber}.`;
+    if (difficultyEl.value === 'free') {
+        stageWins = stageWins + 1;
+        if (stageIndex === 2) {
+            henryFreed = true;
+            message = 'You’ve Freed Henry! You completed all three stages!';
+        } else if (stageWins === 2) {
+            message += ' Stage complete! Choose Next stage.';
+        } else {
+            message += ' One more win to complete this stage.';
+        }
+    }
 }
 function handleNextRound() {
-    if (gameOver === false) {
+    if (gameOver === false || henryFreed === true || rescueLost === true) {
         return;
+    }
+    if (difficultyEl.value === 'free' && stageWins === 2) {
+        stageIndex = stageIndex + 1;
+        stageWins = 0;
     }
     startRound();
 }
@@ -128,20 +166,32 @@ function render() {
     instructionsEl.textContent = `Guess a whole number from 1 to ${maxNumber}. Find it before six mistakes. Follow the higher/lower clues.`;
     remainingDisplayEl.textContent = `Mistakes left: ${maxGuesses - wrongGuesses}`;
     resultDisplayEl.textContent = message;
+    rulesEl.hidden = difficultyEl.value !== 'free';
+    stageDisplayEl.textContent = 'Practice round';
+    if (difficultyEl.value === 'free') {
+        stageDisplayEl.textContent = `${stageLabels[stageIndex]} · Stage wins: ${stageWins} / ${stageTargets[stageIndex]}`;
+    }
     guessInputEl.disabled = gameOver;
     guessBtnEl.disabled = gameOver;
     randomBtnEl.disabled = gameOver;
-    nextBtnEl.hidden = gameOver === false;
+    nextBtnEl.hidden = gameOver === false || henryFreed === true || rescueLost === true;
     nextBtnEl.textContent = 'Next round';
+    if (difficultyEl.value === 'free' && stageWins === 2) {
+        nextBtnEl.textContent = 'Next stage';
+    }
     bodyPartEls.forEach((part, index) => {
-        if (index < wrongGuesses) {
+        if (index < wrongGuesses || henryFreed === true) {
             part.classList.add('visible');
         } else {
             part.classList.remove('visible');
         }
     });
+    hangmanEl.classList.remove('freed');
     captionEl.textContent = 'Keep Henry safe!';
-    if (gameOver === true && wrongGuesses === maxGuesses) {
+    if (henryFreed === true) {
+        hangmanEl.classList.add('freed');
+        captionEl.textContent = 'Henry is standing free!';
+    } else if (gameOver === true && wrongGuesses === maxGuesses) {
         captionEl.textContent = 'Round lost. Try again!';
     }
     updateHistory();

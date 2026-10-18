@@ -31,3 +31,7 @@ const reactionLabels = [
     'One chance remaining',
     'Game over'
 ];
+// Matching positions describe the same rescue stage in all three arrays.
+const stageNames = ['easy', 'medium', 'hard'];
+const stageLabels = ['Easy', 'Medium', 'Hard'];
+const stageTargets = [2, 2, 1];

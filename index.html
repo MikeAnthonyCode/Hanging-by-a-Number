@@ -26,6 +26,7 @@
                 <option value="easy">Easy · 1-20</option>
                 <option value="medium">Medium · 1-50</option>
                 <option value="hard">Hard · 1-100</option>
+                <option value="free">Free Henry</option>
             </select>
         </div>
         <p class="small-text">Changing mode or restarting clears progress.</p>
@@ -52,6 +53,7 @@
                 <p id="henry-caption">Keep Henry safe!</p>
             </section>
             <section class="controls-panel" aria-label="Guess controls">
+                <p id="stage-display"></p>
                 <p id="remaining-display"></p>
                 <p id="result-display" role="status" aria-live="polite"></p>
                 <label for="guess-input">Your guess</label>
@@ -65,6 +67,15 @@
                 <p class="small-text">Enter submits too. Random guesses can cost a mistake.</p>
             </section>
             <aside class="history-panel">
+                <section id="rescue-rules" hidden>
+                    <h2>Free Henry rules</h2>
+                    <ol>
+                        <li>Easy 1-20: two wins in a row.</li>
+                        <li>Medium 1-50: two wins in a row.</li>
+                        <li>Hard 1-100: one round, six mistakes.</li>
+                    </ol>
+                    <p>Easy or Medium loss: reset that stage's streak. Hard loss: restart from Easy.</p>
+                </section>
                 <section class="guess-history" aria-label="Previous guesses">
                     <h2>Your guesses</h2>
                     <ul id="history-display"></ul>
