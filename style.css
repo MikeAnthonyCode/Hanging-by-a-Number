@@ -326,3 +326,137 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 [hidden] {
     display: none !important;
 }
+/* Short browser windows need less space around the same content. */
+@media(max-height: 600px) {
+    body {
+        padding: 8px;
+        align-items: flex-start;
+    }
+    main {
+        padding: 12px;
+    }
+    h1 {
+        font-size: 26px;
+    }
+    .game-layout {
+        margin-top: 8px;
+    }
+}
+/* Compact drawing for smaller laptops; the rest stays at readable text sizes. */
+@media(min-width: 651px) and (max-width: 1050px) {
+    .drawing-panel {
+        width: 170px;
+    }
+    #hangman {
+        transform: scale(0.78);
+        transform-origin: top left;
+        margin-bottom: -51px;
+    }
+    .history-panel {
+        width: 270px;
+    }
+}
+/* Keep the drawing beside the controls on phones and narrow windows. */
+@media (max-width: 650px) {
+    body {
+        padding: 8px;
+        align-items: flex-start;
+    }
+    main {
+        padding: 12px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .game-layout {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+    }
+    .drawing-panel {
+        width: 100px;
+    }
+    #hangman {
+        transform: scale(0.45);
+        transform-origin: top left;
+        margin-bottom: -134px;
+    }
+    .streak-panel {
+        padding-right: 0;
+    }
+    #streak-display, #reward-display {
+        font-size: 13px;
+    }
+    #face-display {
+        position: static;
+        font-size: 26px;
+    }
+    #remaining-display, #result-display {
+        font-size: 16px;
+    }
+    #stage-display {
+        font-size: 13px;
+    }
+    .buttons {
+        gap: 6px;
+    }
+    button {
+        padding: 8px;
+    }
+    .history-panel {
+        width: 100%;
+        display: flex;
+        gap: 14px;
+        padding: 10px;
+    }
+    #rescue-rules {
+        flex: 1;
+        margin-bottom: 0;
+        font-size: 13px;
+    }
+    .guess-history {
+        width: 110px;
+        flex: none;
+        min-width: 110px;
+    }
+    #history-display li {
+        width: 100%;
+        font-size: 14px;
+    }
+    .welcome h1 {
+        font-size: 36px;
+    }
+}
+/* Compact spacing for a phone with limited height. Content remains visible. */
+@media (max-width: 650px) and (max-height: 700px) {
+    body {
+        font-size: 13px;
+    }
+    main {
+        padding: 8px;
+    }
+    h1 {
+        font-size: 22px;
+    }
+    h2 {
+        font-size: 16px;
+    }
+    p {
+        margin: 4px 0;
+    }
+    #rescue-rules {
+        font-size: 12px;
+    }
+    #result-display {
+        font-size: 15px;
+    }
+    input {
+        padding: 6px;
+        font-size: 18px;
+    }
+    button {
+        padding: 7px;
+        font-size: 13px;
+    }
+}
+
