@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Hanging by a Number</title>
-
     <link rel="stylesheet" href="./style.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Isometra&family=Libre+Caslon+Condensed:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <script defer src="./data.js"></script>
     <script defer src="./app.js"></script>
 </head>
 <body>
-
-    <!-- Start/Title Screen Overlay -->
     <div id="start-overlay" class="overlay">
         <div class="overlay-content">
-            <h1>Hanging by a Number!</h1>
-            <p id="title-tag">Guess the secret number or else........</p>
+            <h1 id="game-title">Hanging by a Number!</h1>
+            <p id="title-tag">Guess the $ecret number or else........</p>
             <button id="startBtn">START</button>
         </div>
     </div>
-
     <main class="main-content">
         <h1>Hanging by a Number</h1>
-        <p>Guess a whole number from 1 to 100.</p>
-        <p>You have six chances. Use the higher or lower clues.</p>
-    
-    <div id="hangman" aria-hidden="true">
+        <p>(Poor Henry is counting on you!)</p>
+        <p id="instructions">Guess a whole number from 1 to 100. Six wrong guesses lose the round.</p>
+        <div class="difficulty-controls">
+        </div>
+        <div class="game-layout">
+            <section class="drawing-panel" aria-label="Hangman">
+<div id="hangman" aria-hidden="true">
             <div class="base"></div>
             <div class="pole"></div>
             <div class="beam"></div>
@@ -39,11 +39,12 @@
             <div class="body-part left-leg"></div>
             <div class="body-part right-leg"></div>
         </div>
+            </section>
         <section class="controls-panel" aria-label="Game controls">
         <p id="remaining-display"></p>
         <p id="result-display" role="status"></p>
         <label for="guess-input">Your guess</label>
-        <input id="guess-input" type="number
+        <input id="guess-input" type="number"
                min="1" max="100" step="1" placeholder="1–100">
         <div class="buttons">
             <button id="guess" type="button">Submit Guess</button>
@@ -51,7 +52,7 @@
             <button id="reset" type="button">Reset</button>
         </div>
         <p class="small-text">Random submits a number for you.</p>
-        <p id="history-display"></p>
+        <ul id="history-display"></ul>
         </section>
         </div>
     </main>

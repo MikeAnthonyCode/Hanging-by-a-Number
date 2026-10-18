@@ -7,8 +7,10 @@ body {
     padding: 12px;
     background-color: #eef2f7;
     color: #253047;
-    font-family: Arial, sans-serif;
-
+    font-family: "Libre Caslon Condensed", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style:normal;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,10 +60,16 @@ main {
     text-align: center;
 }
 
+.main-content {
+    font-weight: bold;
+    font-size: 20px;
+}
+
 input, button {
     padding: 10px;
-    font-size: 16px;
+    font-size: 22px;
 }
+
 
 input {
     width: 140px;
@@ -122,4 +130,23 @@ button:disabled {
     font-size: 16px;
     font-weight: normal;
     color: #526078;
+}
+
+#title-tag {
+    font-size: 24px;
+    font-style: italic;
+}
+
+#game-title {
+    color:#bb2929;
+}
+
+#startBtn {
+    border-radius: 20%;
+    font-style:oblique;
+}
+
+#remaining-display {
+    font-size:26px;
+    font-style: oblique;
 }
