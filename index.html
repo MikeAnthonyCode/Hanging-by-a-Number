@@ -15,11 +15,20 @@
         <h1>Hanging by a Number</h1>
         <p>Poor Henry is counting on you.</p>
         <p>Find the secret number. Each wrong guess adds a part to Henry.</p>
-        <button id="start" type="button">Let's save Henry!</button>
+        <button id="start" type="button">Let's save Henry</button>
     </section>
     <main id="game" hidden>
         <h1>Hanging by a Number</h1>
         <p id="instructions">Guess a whole number from 1 to 100. Six wrong guesses lose the round.</p>
+        <div class="difficulty-controls">
+            <label for="difficulty">Game mode</label>
+            <select id="difficulty">
+                <option value="easy">Easy · 1-20</option>
+                <option value="medium">Medium · 1-50</option>
+                <option value="hard">Hard · 1-100</option>
+            </select>
+        </div>
+        <p class="small-text">Changing mode or restarting clears progress.</p>
         <div class="game-layout">
             <section class="drawing-panel" aria-label="Henry and your win streak">
                 <!-- Decorative drawing; the text beside it explains the game state. -->

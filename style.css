@@ -40,6 +40,22 @@ p {
     font-size: 18px;
 }
 
+.difficulty-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+select {
+    padding: 6px;
+    border: 1px solid #8793a5;
+    border-radius: 6px;
+    background-color: white;
+    color: #253047;
+    font-size: 15px;
+}
+
 /* Three compact columns share the screen on laptops. */
 .game-layout {
     display: flex;

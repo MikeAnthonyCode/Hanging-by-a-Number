@@ -6,6 +6,8 @@ let previousGuesses;
 let gameOver;
 let message;
 //----------------Cache the Elements--------------//
+const difficultyEl = document.querySelector('#difficulty');
+const instructionsEl = document.querySelector('#instructions');
 const startScreenEl = document.querySelector('#start-screen');
 const gameEl = document.querySelector('#game');
 const bodyPartEls = document.querySelectorAll('.body-part');
@@ -25,6 +27,16 @@ function getRandomNumber() {
 }
 // Start a fresh round using the following rules
 function init() {
+    const difficulty = difficultyEl.value;
+    if (difficulty === 'easy') {
+        maxNumber = 20;
+    } else if (difficulty === 'medium') {
+        maxNumber = 50;
+    } else {
+        maxNumber = 100;
+    }
+    guessInputEl.max = maxNumber;
+    guessInputEl.placeholder = `1–${maxNumber}`;
     secretNumber = getRandomNumber();
     wrongGuesses = 0;
     previousGuesses = [];
@@ -35,6 +47,7 @@ function init() {
 }
 // Display the state without changing the score.
 function render() {
+    instructionsEl.textContent = `Guess a whole number from 1 to ${maxNumber}. Six wrong guesses lose the round.`;
     remainingDisplayEl.textContent =
         `Guesses remaining: ${maxGuesses - wrongGuesses}`;
     resultDisplayEl.textContent = message;
@@ -125,6 +138,7 @@ function updateHistory() {
 guessBtnEl.addEventListener('click', handleGuess);
 randomBtnEl.addEventListener('click', handleRandomGuess);
 resetBtnEl.addEventListener('click', init);
+difficultyEl.addEventListener('change', init);
 guessInputEl.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         handleGuess();
