@@ -1,4 +1,5 @@
-*{
+/* Count padding and borders inside each element's size. */
+* {
     box-sizing: border-box;
 }
 body {
@@ -7,146 +8,263 @@ body {
     padding: 12px;
     background-color: #eef2f7;
     color: #253047;
-    font-family: "Libre Caslon Condensed", serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style:normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #11141a; /* Dark background */
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Ensures it stays on top of everything */
-    opacity: 1;
-    transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth fade effect */
-    cursor: pointer;
-}
-
-/* Overlay Text Formatting */
-.overlay-content {
-    text-align: center;
-}
-
-.overlay-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-}
-
-/* This class will be added by JavaScript to make it disappear */
-.overlay.hidden {
-    opacity: 0;
-    visibility: hidden; /* Hides it completely and prevents element blocking clicks underneath */
-    pointer-events: none; /* Disables any further clicks on the overlay */
-}
-
 main {
     width: 100%;
-    max-width: 1050px;
-    padding: 20px;
+    max-width: 1180px;
+    padding: 16px;
     background-color: white;
     border-radius: 16px;
     text-align: center;
 }
-
-.main-content {
-    font-weight: bold;
+h1 {
+    margin: 0 0 6px;
+    font-size: 30px;
+}
+h2 {
+    margin: 0 0 6px;
     font-size: 20px;
 }
-
-input, button {
-    padding: 10px;
-    font-size: 22px;
+p {
+    margin: 6px 0;
+    line-height: 1.35;
+    font-size: 18px;
 }
 
+#start {
+    font-size: 18px;
+}
 
+/* Three compact columns share the screen on laptops. */
+.game-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 12px;
+}
+.drawing-panel {
+    width: 220px;
+    flex-shrink: 0;
+}
+.controls-panel {
+    flex: 1;
+    min-width: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#remaining-display {
+    font-size: 20px;
+    font-weight: bold;
+}
+#result-display {
+    min-height: 54px;
+    font-size: 20px;
+    font-weight: bold;
+}
+label {
+    font-weight: bold;
+}
 input {
-    width: 140px;
+    width: 120px;
+    margin-top: 6px;
+    padding: 8px;
+    border: 2px solid #8793a5;
+    border-radius: 8px;
+    font-size: 22px;
+    text-align: center;
 }
-
 .buttons {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 10px;
 }
-
-#result-display {
-    min-height: 48px;
+button {
+    padding:9px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #253047;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
 }
-
+button:hover {
+    background-color: #405578;
+}
 button:disabled {
     opacity: 0.5;
+    cursor: not-allowed;
 }
-
-/* Keep the guess history clearly separated. */
+#reset {
+    background-color: #a93430;
+}
+.small-text {
+    font-size: 16px;
+    color: #526078;
+    font-weight: bold;
+}
+/* Wider rules column so as to avoid blocks of wrapped text. */
 .history-panel {
-    width: 190px;
-    align-self: stretch;
-    padding: 16px;
+    width: 300px;
+    flex-shrink: 0;
+    padding: 12px;
     border-radius: 12px;
     background-color: #f1f4f8;
     text-align: left;
-    flex-shrink: 0;
 }
-
+/* Six accepted guess fit in three rows; no history is hidden. */
 #history-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 #history-display li {
-    margin-bottom: 10px;
-    font-size: 22px;
+    width: calc(50% - 4px);
+    font-size: 15px;
     font-weight: bold;
+    line-height: 1.35;
 }
-
 .too-low {
     color: #175cc4;
 }
-
 .too-high {
     color: #bb2929;
 }
-
 .correct {
     color: #18733b;
 }
-
 #history-display .empty-history {
-    font-size: 16px;
+    width: 100%;
     font-weight: normal;
     color: #526078;
 }
-
-#title-tag {
-    font-size: 24px;
-    font-style: italic;
+/* Position streak text and its reaction to sit directly above the hangman drawing */
+#henry-caption {
+    font-size: 17px;
+    font-weight: bold;
 }
-
-#game-title {
-    color:#bb2929;
+/* Reference point for the Hangman Drawing */
+#hangman {
+    position: relative;
+    width: 220px;
+    height: 250px;
+    margin: 4px 0;
 }
-
-#startBtn {
-    border-radius: 20%;
-    font-style:oblique;
+/*Every piece is positioned inside the hangman box. */
+#hangman div {
+    position: absolute;
+    background-color: #253047;
 }
-
-#remaining-display {
-    font-size:26px;
-    font-style: oblique;
+/* The stand. */
+.base {
+    width: 180px;
+    height: 6px;
+    left: 20px;
+    top: 240px;
+}
+.pole {
+    width: 6px;
+    height: 230px;
+    left: 50px;
+    top: 10px;
+}
+.beam {
+    width: 103px;
+    height: 6px;
+    left: 50px;
+    top: 10px;
+}
+.rope {
+    width: 4px;
+    height: 35px;
+    left: 149px;
+    top: 10px;
+}
+/* Hide all body parts at the beginning. */
+.body-part {
+    display: none;
+}
+/* Javascript adds this class to reveal a body part. */
+.visible {
+    display: block;
+}
+/* The six body parts. */
+.head {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    left: 131px;
+    top: 45px;
+}
+.torso {
+    width: 6px;
+    height: 65px;
+    left: 148px;
+    top: 85px;
+}
+.left-arm {
+    width: 45px;
+    height: 6px;
+    left: 110px;
+    top: 105px;
+    transform: rotate(-35deg);
+}
+.right-arm {
+    width: 45px;
+    height: 6px;
+    left: 147px;
+    top: 105px;
+    transform: rotate(35deg);
+}
+.left-leg {
+    width: 50px;
+    height: 6px;
+    left: 111px;
+    top: 166px;
+    transform: rotate(-55deg);
+}
+.right-leg {
+    width: 50px;
+    height: 6px;
+    left: 141px;
+    top: 166px;
+    transform: rotate(55deg);
+}
+.welcome {
+    max-width: 720px;
+    padding: 24px;
+    text-align: center;
+}
+.welcome h1 {
+    font-family: Georgia, serif;
+    font-size: 48px;
+}
+.welcome button {
+    margin-top: 16px;
+}
+.eyebrow {
+    color: #526078;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+button:focus-visible, select:focus-visible, input:focus-visible {
+    outline: 3px solid #175cc4;
+    outline-offset: 3px;
+}
+/*To keep hidden elements hiden even though their normal display is flex. */
+[hidden] {
+    display: none !important;
 }

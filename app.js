@@ -6,7 +6,9 @@ let previousGuesses;
 let gameOver;
 let message;
 //----------------Cache the Elements--------------//
-const overlay = document.getElementById('start-overlay');
+const startScreenEl = document.querySelector('#start-screen');
+const gameEl = document.querySelector('#game');
+const bodyPartEls = document.querySelectorAll('.body-part');
 const guessInputEl = document.querySelector('#guess-input');
 const guessBtnEl = document.querySelector('#guess');
 const randomBtnEl = document.querySelector('#random')
@@ -14,7 +16,7 @@ const resetBtnEl = document.querySelector('#reset');
 const remainingDisplayEl = document.querySelector('#remaining-display');
 const resultDisplayEl = document.querySelector('#result-display');
 const historyDisplayEl = document.querySelector('#history-display');
-const startBtn = document.querySelector('#startBtn')
+const startBtnEl = document.querySelector('#start');
 //------------------Functions----------------------//
 function getRandomNumber() {
     return Math.floor(
@@ -36,6 +38,13 @@ function render() {
     remainingDisplayEl.textContent =
         `Guesses remaining: ${maxGuesses - wrongGuesses}`;
     resultDisplayEl.textContent = message;
+    bodyPartEls.forEach((part, index) => {
+        if (index < wrongGuesses) {
+            part.classList.add('visible');
+        } else {
+            part.classList.remove('visible');
+        }
+    });
     updateHistory();
     guessInputEl.disabled = gameOver;
     guessBtnEl.disabled = gameOver;
@@ -121,8 +130,10 @@ guessInputEl.addEventListener('keydown', (event) => {
         handleGuess();
     }
 });
-startBtn.addEventListener('click', () => {
-    overlay.classList.add('hidden'); // Adds the CSS class that triggers the fade-out
+startBtnEl.addEventListener('click', () => {
+    startScreenEl.hidden = true;
+    gameEl.hidden = false;
+    guessInputEl.focus();
 });
 // Call init once now to start the first round.
 init();
