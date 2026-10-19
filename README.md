@@ -3,7 +3,9 @@ A browser number guessing game with a hangman twist. Use higher/lower clues to f
 ![Game showing Henry, controls, rules and guess history](assets/game-screenshot.png)
 ## Getting started
 Open index.html in your browser. No installation is needed. Select a mode, enter a whole number, and click Submit or press Enter. Random submits an untried number and can cost a mistake.
-Deployment is pending instructor confirmation. A verified playable link will be added after approval and publication.
+[Play Hanging by a Number](https://mikeanthonycode.github.io/Hanging-by-a-Number/)
+
+Open the link above to play online. You can also download the project and open index.html locally.
 [Planning](planning/PLAN.md) | [Testing](testing/TESTING.md) | [Requirements](docs/REQUIREMENTS.md)
 ## Rules
 - Easy: 1–20. Medium: 1–50. Hard: 1–100.
@@ -18,6 +20,5 @@ HTML, CSS with Flexbox, and vanilla JavaScript using the DOM. Henry is drawn wit
 ## Development and attribution
 I developed the game from my earlier Basic prototype. AI assistance supported the code, explanations and testing. I am reviewing the implementation and following my course’s policy for acknowledging that assistance. Screenshots show the game itself.
 ## Next steps
-- Obtain instructor confirmation and publish the approved game.
 - Add an optional sound toggle.
 - Explore saving a best streak after learning browser storage.

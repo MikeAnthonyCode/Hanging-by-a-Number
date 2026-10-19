@@ -1,6 +1,12 @@
 # Manual test record
 Test date: October 18, 2026.
-Browser and window size: record what you used.
+Everything working.
+## Published game test
+Test date: October 19, 2026.
+Live URL: https://mikeanthonycode.github.io/Hanging-by-a-Number/
+Desktop browser and window size: Chrome & Safari - 16 inch Macbook Pro
+Phone model and browser: iPhone 13 Pro Max - Google Chrome
+Results: Everything passed including playing on mobile devices such as iphone.
 Changed [ ] to [x] once I tested that item successfully.
 - [x] Title alone appears on refresh; Start reveals the game.
 - [x] Easy uses 1–20, Medium 1–50, Hard 1–100.
@@ -20,4 +26,5 @@ Changed [ ] to [x] once I tested that item successfully.
 - [x] Browser console shows no errors during these checks.
 ## Problems found and fixes
 N/A - 18/10/2026
+No issues other than arrows to make numbers go up and down only working in Safari. Will remedy it so that it works on chrome as well or see if this is something built-in to Safari.
  

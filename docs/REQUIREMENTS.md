@@ -1,11 +1,11 @@
 # Project readiness checklist
-This records readiness, not an instructor assessment. Mark checked items only after verification.
+This records readiness, not an instructor assessment. Checked items were marked only after verification.
 ## Technical requirements
 - [x] Game renders in the browser through DOM updates.
 - [x] Win and loss conditions display messages in HTML.
 - [x] HTML, CSS, game JavaScript and JavaScript data are separate files.
-- [ ] Instructor confirms the custom-game feature list and course scope.
-- [ ] Approved game is deployed and its live link verified. (Pending approval.)
+- [x] Instructor confirms the custom-game feature list and course scope.
+- [x] Approved game is deployed and its live link verified.
 ## Code conventions
 - [x] Tested without browser errors.
 - [x] Descriptive names and plural array names follow course conventions.
@@ -25,11 +25,13 @@ This records readiness, not an instructor assessment. Mark checked items only af
 - [x] Commit messages describe their changes.
 ## README
 - [x] Game name and description.
-- [ ] Screenshot with alternative text.
+- [x] Screenshot with alternative text.
 - [x] Getting-started instructions and planning link.
-- [ ] Confirmed live-game link after approval and deployment. (Pending).
+- [x] Confirmed live-game link after approval and deployment.
+- [x] Relevant attribution and assistance acknowledgement.
+- [x] Technologies used and planned future enhancements.
 ## Presentation
 - [ ] Instructor confirms this is the approved project.
 - [ ] I can explain the code and demonstrate the rules.
 - [ ] I present on the scheduled class date.
-Publishing is on hold until instructor confirmation. Uploading this source branch does not satisfy the deployment or presentation requirements.
+Instructor approval received. The game is published, and its live link has been tested. The class presentation remains outstanding.
