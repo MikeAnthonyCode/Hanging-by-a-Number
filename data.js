@@ -35,3 +35,6 @@ const reactionLabels = [
 const stageNames = ['easy', 'medium', 'hard'];
 const stageLabels = ['Easy', 'Medium', 'Hard'];
 const stageTargets = [2, 2, 1];
+//Keep records under a key unique to this game.
+const statsStorageKey = 'hanging-by-a-number-stats-v1';
+const statsModes = ['easy', 'medium', 'hard'];

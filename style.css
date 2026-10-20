@@ -458,5 +458,30 @@ button:focus-visible, select:focus-visible, input:focus-visible {
         padding: 7px;
         font-size: 13px;
     }
+    .saved-records {
+        width: 100%;
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px solid #8793a5;
+    }
+    .saved-records summary {
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .saved-records summary:focus-visible {
+        outline: 3px solid #175cc4;
+        outline-offset: 3px;
+    }
+    .saved-records p {
+        font-size: 13px;
+        line-height: 1.35;
+        }
+    @media (max-width: 650px) {
+        .history-panel {
+            flex-wrap: wrap;
+        }
+    }
+    
 }
 

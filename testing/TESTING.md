@@ -24,6 +24,7 @@ Changed [ ] to [x] once I tested that item successfully.
 - [x] Full history and outcome messages remain usable at laptop and phone widths.
 - [x] Keyboard focus is visible and controls have usable labels.
 - [x] Browser console shows no errors during these checks.
+- [x] Wins & Streaks counter works via localStorage.
 ## Problems found and fixes
 N/A - 18/10/2026
 No issues other than arrows to make numbers go up and down only working in Safari. Will remedy it so that it works on chrome as well or see if this is something built-in to Safari.

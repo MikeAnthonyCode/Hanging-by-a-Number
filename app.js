@@ -10,6 +10,9 @@ let stageIndex = 0;
 let stageWins = 0;
 let henryFreed = false;
 let rescueLost = false;
+// Saved records are seperate from the current round.
+let playerStats = createEmptyStats();
+let storageNote = 'Personal records for this browser only.';
 /* 2. Cache the HTML elements once so functions can reuse them below. */
 const startScreenEl = document.querySelector('#start-screen');
 const startBtnEl = document.querySelector('#start');
@@ -32,6 +35,11 @@ const faceDisplayEl = document.querySelector('#face-display');
 const hangmanEl = document.querySelector('#hangman');
 const captionEl = document.querySelector('#henry-caption');
 const bodyPartEls = document.querySelectorAll('.body-part');
+const easyStatsEl = document.querySelector('#stats-easy');
+const mediumStatsEl = document.querySelector('#stats-medium');
+const hardStatsEl = document.querySelector('#stats-hard');
+const rescueStatsEl = document.querySelector('#stats-rescues');
+const storageNoteEl = document.querySelector('#storage-note');
 /* 3. Round setup. Resetting a mode and starting a round are different jobs. */
 function getRandomNumber() {
     return Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
@@ -122,6 +130,9 @@ function handleGuess() {
 }
 /* 5. A rescue win counts toward the current stage. */
 function handleWin() {
+    if (gameOver === true) {
+        return;
+    }
     gameOver = true;
     winStreak = winStreak + 1;
     message = `You win! The number was ${secretNumber}.`;
@@ -136,6 +147,7 @@ function handleWin() {
             message += ' One more win to complete this stage.';
         }
     }
+    recordWin();
 }
 function handleNextRound() {
     if (gameOver === false || henryFreed === true || rescueLost === true) {
@@ -197,6 +209,7 @@ function render() {
     updateHistory();
     updateStreak();
     updateFace();
+    updateStatsDisplay();
 }
 function updateHistory() {
     historyDisplayEl.textContent = '';
@@ -241,6 +254,81 @@ function updateFace() {
         faceDisplayEl.setAttribute('aria-label', reactionLabels[wrongGuesses]);
     }
 }
+function createEmptyStats() {
+    return {
+        easy: { wins: 0, bestStreak: 0 },
+        medium: { wins: 0, bestStreak: 0 },
+        hard: { wins: 0, bestStreak: 0 },
+        rescues: 0
+        };
+    }
+function isValidCount(value) {
+    return Number.isSafeInteger(value) && value >= 0;
+    }
+function updateStatsDisplay() {
+    easyStatsEl.textContent =
+        `Easy: ${playerStats.easy.wins} wins | Best streak: ${playerStats.easy.bestStreak}`;
+    mediumStatsEl.textContent =
+        `Medium: ${playerStats.medium.wins} wins | Best streak: ${playerStats.medium.bestStreak}`;
+    hardStatsEl.textContent =
+        `Hard: ${playerStats.hard.wins} wins | Best streak: ${playerStats.hard.bestStreak}`;
+    rescueStatsEl.textContent = `Henry freed: ${playerStats.rescues} times`;
+    storageNoteEl.textContent = storageNote;
+}
+function loadStats() {
+    try {
+        const savedText = localStorage.getItem(statsStorageKey);
+        if (savedText === null) {
+            return;
+        }
+        const savedStats = JSON.parse(savedText);
+        const cleanStats = createEmptyStats();
+        for (const mode of statsModes) {
+            const record = savedStats[mode];
+            if (
+                !isValidCount(record.wins) ||
+                !isValidCount(record.bestStreak) ||
+                record.bestStreak > record.wins
+            ) {
+                throw new Error('Invalid saved record.');
+            }
+            cleanStats[mode].wins = record.wins;
+            cleanStats[mode].bestStreak = record.bestStreak;
+        }
+        if (!isValidCount(savedStats.rescues)) {
+            throw new Error('Invalid rescue count.');
+        }
+        cleanStats.rescues = savedStats.rescues;
+        playerStats = cleanStats;
+    } catch (error) {
+        storageNote = 'Records could not be loaded. Starting at zero.';
+    }
+}
+function saveStats() {
+    try {
+        const savedText = JSON.stringify(playerStats);
+        localStorage.setItem(statsStorageKey, savedText);
+        storageNote = 'Personal records saved in this browser.';
+    } catch (error) {
+        storageNote = 'Saving unavailable. Records last for this visit only.';
+    }
+}
+function recordWin() {
+    const mode = difficultyEl.value;
+    if (mode === 'free') {
+        if (henryFreed === false) {
+            return;
+        }
+        playerStats.rescues = playerStats.rescues + 1;
+    } else {
+        const record = playerStats[mode];
+        record.wins = record.wins + 1;
+        if (winStreak > record.bestStreak) {
+            record.bestStreak = winStreak;
+        }
+    }
+    saveStats();
+}
 /* EVENT LISTENERS - To Enable the functions */
 startBtnEl.addEventListener('click', () => {
     startScreenEl.hidden = true;
@@ -258,5 +346,6 @@ guessInputEl.addEventListener('keydown', (event) => {
         handleGuess();
     }
 });
-// Prepare the first round behind the welcome screen.
+// Load personal records, then prepare the first round.
+loadStats();
 init();

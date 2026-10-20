@@ -19,6 +19,16 @@ Open the link above to play online. You can also download the project and open i
 HTML, CSS with Flexbox, and vanilla JavaScript using the DOM. Henry is drawn with CSS shapes. No external game libraries are used.
 ## Development and attribution
 I developed the game from my earlier Basic prototype. AI assistance supported the code, explanations and testing. I am reviewing the implementation and following my course’s policy for acknowledging that assistance. Screenshots show the game itself.
+## Personal records
+Open Your records to see total wins and best streaks for Easy, Medium and Hard, plus completed Free Henry rescues.
+Records are saved in this browser. Free Henry stage wins do not add to practice-mode totals.
+Restart, mode changes and refreshes end the current streak but keep saved totals and best streaks.
+Records do not sync between browsers or devices. Clearing site data removes them. These are editable personal records, not verified competitive scores.
+Use one game tab at a time. Simultaneous tabs do not merge records.
 ## Next steps
+- Clear saved records option.
+- Number adjustment buttons functionality in chrome.
+- Stage progress tracker for 'Free Henry' mode.
+- New personal best streak message.
+- Round summary message.
 - Add an optional sound toggle.
-- Explore saving a best streak after learning browser storage.
