@@ -40,6 +40,8 @@ const mediumStatsEl = document.querySelector('#stats-medium');
 const hardStatsEl = document.querySelector('#stats-hard');
 const rescueStatsEl = document.querySelector('#stats-rescues');
 const storageNoteEl = document.querySelector('#storage-note');
+const decreaseBtnEl = document.querySelector('#decrease');
+const increaseBtnEl = document.querySelector('#increase');
 /* 3. Round setup. Resetting a mode and starting a round are different jobs. */
 function getRandomNumber() {
     return Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
@@ -184,6 +186,8 @@ function render() {
         stageDisplayEl.textContent = `${stageLabels[stageIndex]} · Stage wins: ${stageWins} / ${stageTargets[stageIndex]}`;
     }
     guessInputEl.disabled = gameOver;
+    decreaseBtnEl.disabled = gameOver;
+    increaseBtnEl.disabled = gameOver;
     guessBtnEl.disabled = gameOver;
     randomBtnEl.disabled = gameOver;
     nextBtnEl.hidden = gameOver === false || henryFreed === true || rescueLost === true;
@@ -329,6 +333,22 @@ function recordWin() {
     }
     saveStats();
 }
+function adjustGuess(amount) {
+    if (gameOver === true) {
+        return;
+    }
+    let value = Number(guessInputEl.value);
+    if (guessInputEl.value.trim() === '' || !Number.isInteger(value)) {
+        value = minNumber;
+    } else {
+        value = value + amount;
+    } else if (value > maxNumber) {
+        value = maxNumber;
+    }
+    guessInputEl.value = value;
+    guessInputEl.focus();
+}
+
 /* EVENT LISTENERS - To Enable the functions */
 startBtnEl.addEventListener('click', () => {
     startScreenEl.hidden = true;
@@ -345,6 +365,12 @@ guessInputEl.addEventListener('keydown', (event) => {
         event.preventDefault();
         handleGuess();
     }
+});
+decreaseBtnEl.addEventListener('click', () => {
+    adjustGuess(-1);
+});
+increaseBtnEl.addEventListener('click', () => {
+    adjustGuess(1);
 });
 // Load personal records, then prepare the first round.
 loadStats();

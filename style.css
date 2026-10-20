@@ -462,4 +462,29 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     @media (max-width: 650px) {
         .history-panel { flex-wrap: wrap; }
     }   
-
+/* Consistent number controls in Chrome and Safari. */
+.number-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    max-width: 100%;
+}
+.number-controls input {
+    width: 90px;
+    min-width: 0;
+    margin-top: 0;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+.step-button {
+    min-width: 36px;
+    min-height: 40px;
+    padding: 4px;
+    font-size: 20px;
+}
+.number-controls input::-webkit-inner-spin-button,
+.number-controls input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

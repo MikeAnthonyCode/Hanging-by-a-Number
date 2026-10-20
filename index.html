@@ -59,7 +59,14 @@
                 <p id="remaining-display"></p>
                 <p id="result-display" role="status" aria-live="polite"></p>
                 <label for="guess-input">Your guess</label>
-                <input id="guess-input" type="number" min="1" max="20" step="1" aria-describedby="instructions">
+                <div class="number-controls">
+                    <button id="decrease" class="step-button" type="button"
+                        aria-label="Decrease guess by one">-</button>
+                    <input id="guess-input" type="number" min="1" max="20"
+                        step="1" aria-describedby="instructions">
+                    <button id="increase" class="step-button" type="button"
+                        aria-label="Increase guess by one">+</button>
+                </div>
                 <div class="buttons">
                     <button id="guess" type="button">Submit</button>
                     <button id="random" type="button">Random</button>
