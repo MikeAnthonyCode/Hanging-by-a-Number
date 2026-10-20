@@ -342,13 +342,15 @@ function adjustGuess(amount) {
         value = minNumber;
     } else {
         value = value + amount;
+    }
+    if (value < minNumber) {
+        value = minNumber;
     } else if (value > maxNumber) {
         value = maxNumber;
     }
     guessInputEl.value = value;
     guessInputEl.focus();
 }
-
 /* EVENT LISTENERS - To Enable the functions */
 startBtnEl.addEventListener('click', () => {
     startScreenEl.hidden = true;
