@@ -27,7 +27,6 @@ Records do not sync between browsers or devices. Clearing site data removes them
 Use one game tab at a time. Simultaneous tabs do not merge records.
 ## Next steps
 - Clear saved records option.
-- Number adjustment buttons functionality in chrome.
 - Stage progress tracker for 'Free Henry' mode.
 - New personal best streak message.
 - Round summary message.
